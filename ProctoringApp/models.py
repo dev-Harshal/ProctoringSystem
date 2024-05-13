@@ -10,7 +10,9 @@ class Exam(models.Model):
     end_date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    status = models.CharField(max_length=10,choices=(('Active','Active'),('Completed','Completed')),default="Active")
+    status = models.CharField(max_length=10,choices=(('Active','Active'),('In Active','In Active'),('Completed','Completed')),default="In Active")
+
+    
 
 class Questions(models.Model):
     exam = models.ForeignKey(Exam,on_delete=models.CASCADE)

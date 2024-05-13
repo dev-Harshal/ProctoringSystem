@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from Users.models import User,OTP  
 from django.contrib.auth import authenticate,login,logout
 import random
+from Users.mail import send_mail_to_the_user
 # Create your views here.
 
 def indexView(request):
@@ -41,10 +42,12 @@ def loginView(request):
                 obj.otp = otp
                 obj.save()
                 print("OTP:",otp)
+                send_mail_to_the_user(email,otp)
                 return redirect('/verify_otp/?email=' + email)
             else:
                 OTP.objects.create(user=user, otp=otp)
                 print("OTP:",otp)
+                send_mail_to_the_user(email,otp)
                 return redirect('/verify_otp/?email=' + email)
         else:
             return render(request,'login.html')        
