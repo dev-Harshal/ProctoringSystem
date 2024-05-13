@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Verify</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static "LogReg/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css" %}">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static "LogReg/css/style.css" %}">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url('{% static "LogReg/images/bg-registration-form-1.jpg" %}');">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="{% static "LogReg/images/registration-form-3.jpg" %}" alt="">
+				</div>
+				<form method="post">
+					<h3>Verify Otp</h3>
+					{% csrf_token %}
+
+					<div class="form-wrapper">
+						<input type="text" placeholder="Enter OTP" name="otp" class="form-control" required>
+						<i class="zmdi zmdi-email"></i>
+					</div>
+					
+
+					<button type="submit">Verify
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+		
+	</body>
+</html>
