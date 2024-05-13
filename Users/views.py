@@ -21,10 +21,11 @@ def registerView(request):
         full_name = request.POST.get('full_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        role =request.POST.get('role')
         photo = request.FILES.get('photo')
         if User.objects.filter(email=str(email).lower()).exists():
             return render(request,'register.html')
-        User.objects.create(full_name=str(full_name).title(),email=str(email).lower(),password=password,photo=photo,username=email)
+        User.objects.create(full_name=str(full_name).title(),email=str(email).lower(),password=password,photo=photo,username=email,role=role)
         return redirect('/')
     else:
         return render(request, 'register.html')

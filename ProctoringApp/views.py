@@ -41,7 +41,7 @@ def createQuestionView(request,exam_id):
 
 @login_required_teacher()
 def listExamView(request):
-    exams = Exam.objects.all()
+    exams = Exam.objects.filter(teacher=request.user).all()
     return render(request, 'list_exam.html',context={'exams':exams})
 
 
