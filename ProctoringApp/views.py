@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from ProctoringApp.models import *
 from ProctoringApp.decorators import login_required_teacher
+from ProctoringApp.tasks import update_status
 # Create your views here.
 
 
@@ -41,6 +42,7 @@ def createQuestionView(request,exam_id):
 
 @login_required_teacher()
 def listExamView(request):
+    update_status()
     exams = Exam.objects.filter(teacher=request.user).all()
     return render(request, 'list_exam.html',context={'exams':exams})
 

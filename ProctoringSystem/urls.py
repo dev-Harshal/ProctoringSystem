@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('ProctoringApp.urls')),
     path('',include('Users.urls')),
+    path('',include('Examination.urls')),
 ]
 
 if settings.DEBUG:

@@ -3,6 +3,7 @@ from Users.models import User,OTP
 from django.contrib.auth import authenticate,login,logout
 import random
 from Users.mail import send_mail_to_the_user
+from ProctoringApp.decorators import login_required_teacher
 # Create your views here.
 
 def indexView(request):
@@ -11,7 +12,7 @@ def indexView(request):
 def studentDashboardView(request):
     return render(request, 'student_dashboard.html')
 
-
+@login_required_teacher()
 def teacherDashboardView(request):
     return render(request, 'teacher_dashboard.html')
 
@@ -35,8 +36,9 @@ def loginView(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
+        role =request.POST.get('role')
         user = authenticate(email=email, password=password)
-        if user is not None:
+        if user is not None and role==user.role:
             otp = str(random.randint(1000, 9999))
             if OTP.objects.filter(user=user).exists():
                 obj = OTP.objects.filter(user=user).last()

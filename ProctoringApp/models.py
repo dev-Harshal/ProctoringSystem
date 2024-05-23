@@ -1,25 +1,27 @@
+import uuid
 from django.db import models
 from Users.models import User
 # Create your models here.
 
 
 class Exam(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
     teacher = models.ForeignKey(User,on_delete=models.CASCADE)
-    subject = models.CharField(max_length=100)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    subject = models.CharField(max_length=100,null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    start_time = models.TimeField(null=True, blank=True)
+    end_time = models.TimeField(null=True, blank=True)
     status = models.CharField(max_length=10,choices=(('Active','Active'),('In Active','In Active'),('Completed','Completed')),default="In Active")
 
     
 
 class Questions(models.Model):
     exam = models.ForeignKey(Exam,on_delete=models.CASCADE)
-    question = models.CharField(max_length=1000)
-    option1 = models.CharField(max_length=1000)
-    option2 = models.CharField(max_length=1000)
-    option3 = models.CharField(max_length=1000)
-    option4 = models.CharField(max_length=1000)
-    answer = models.CharField(max_length=1000)
-    marks = models.IntegerField()
+    question = models.CharField(max_length=100,null=True, blank=True)
+    option1 = models.CharField(max_length=100,null=True, blank=True)
+    option2 = models.CharField(max_length=100,null=True, blank=True)
+    option3 = models.CharField(max_length=100,null=True, blank=True)
+    option4 = models.CharField(max_length=100,null=True, blank=True)
+    answer = models.CharField(max_length=100,null=True, blank=True)
+    marks = models.IntegerField(null=True, blank=True)
