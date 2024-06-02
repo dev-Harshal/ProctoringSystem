@@ -8,17 +8,13 @@ def update_status():
     current_time = now.time()
 
     for exam in Exam.objects.all():
-        if exam.start_date == current_date:
+        if exam.start_date > current_date:
+            exam.status = "In Active"
+        elif exam.start_date == current_date == exam.end_date:
             if exam.start_time <= current_time <= exam.end_time:
                 exam.status = "Active"
             elif current_time < exam.start_time:
-                pass  # The provided time is in the future
+                exam.status = "In Active"
             else:
                 exam.status = "Completed"
-        else:
-            if exam.start_date < current_date:
-                exam.status = "Completed"
-            else:
-                pass  # The provided date is in the future
-        exam.save()
-
+        

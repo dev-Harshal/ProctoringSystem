@@ -41,12 +41,14 @@
                       <td>{{exam.start_time}}:{{exam.end_time}}</td>
                       {% if exam.status == "In Active" %}
                       <td><span class="badge bg-warning text-dark">{{exam.status|upper}}</span></td>
+                      <td><a href="{% url "student-list-question" exam.id %}"><button type="button" class="btn btn-primary" >JOIN</button></a></td>
                       {% elif exam.status == "Active"  %}
                       <td><span class="badge bg-success">{{exam.status|upper}}</span></td>
+                      <td><a href="{% url "student-list-question" exam.id %}"><button type="button" class="btn btn-primary">JOIN</button></a></td>
                       {% else %}
                       <td><span class="badge bg-danger">{{exam.status|upper}}</span></td>
+                      <td><a href="{% url "student-list-question" exam.id %}"><button type="button" class="btn btn-primary" >JOIN</button></a></td>
                       {% endif %}
-                      <td><a href="{% url "update-exam" exam.id %}"><button type="button" class="btn btn-secondary"><i class="bi bi-pen"></i></button></a> <a href="{% url "create-question" exam.id %}"><button type="button" class="btn btn-primary">Question<i class="bi bi-plus"></i></button></a> <a href="{% url "list-question" exam.id %}"><button type="button" class="btn btn-danger"><i class="bi bi-eye"></i></button></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

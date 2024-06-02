@@ -25,3 +25,12 @@ class Questions(models.Model):
     option4 = models.CharField(max_length=100,null=True, blank=True)
     answer = models.CharField(max_length=100,null=True, blank=True)
     marks = models.IntegerField(null=True, blank=True)
+
+
+class Result(models.Model):
+    exam = models.ForeignKey(Exam,on_delete=models.CASCADE)
+    student = models.ForeignKey(User,on_delete=models.CASCADE)
+    score = models.IntegerField(null=True, blank=True,default=0)
+    total = models.IntegerField(null=True, blank=True)
+    status = models.CharField(max_length=10,choices=(('Active','Active'),('Completed','Completed')),default="Active")
+

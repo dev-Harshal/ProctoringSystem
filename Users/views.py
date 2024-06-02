@@ -27,7 +27,7 @@ def registerView(request):
         if User.objects.filter(email=str(email).lower()).exists():
             return render(request,'register.html')
         User.objects.create(full_name=str(full_name).title(),email=str(email).lower(),password=password,photo=photo,username=email,role=role)
-        return redirect('/')
+        return redirect('index')
     else:
         return render(request, 'register.html')
     
@@ -62,7 +62,6 @@ def verifyOTPView(request):
     if request.method == 'POST':
         email = request.GET.get('email')
         otp = request.POST.get('otp')
-        print(email,otp)
         try:
             user = User.objects.get(email=email)
             obj = OTP.objects.filter(user=user).last()

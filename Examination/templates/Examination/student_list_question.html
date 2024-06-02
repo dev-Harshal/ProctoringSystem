@@ -1,0 +1,81 @@
+{% extends "teacher_base.html" %}
+
+
+
+{% block content %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Exams</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "teacher-dashboard" %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Exams</li>
+          </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+
+
+
+    {% for Q in questions %}
+    
+    <div class="container mt-5">
+        <div class="card">
+          <div class="card-header">
+            <h3>{{Q.question}}</h3>
+          </div>
+          <div class="card-body">
+            <form method='post'>
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{Q.id}}">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="mcq" id="option1" value="{{Q.option1}}">
+                  <label class="form-check-label" for="option1">
+                    A. {{Q.option1}}
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="mcq" id="option2" value="{{Q.option2}}">
+                  <label class="form-check-label" for="option2">
+                    B. {{Q.option2}}
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="mcq" id="option3" value="{{Q.option3}}">
+                  <label class="form-check-label" for="option3">
+                    C. {{Q.option3}}
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="mcq" id="option4" value="{{Q.option4}}">
+                  <label class="form-check-label" for="option4">
+                    D. {{Q.option4}}
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    
+    
+    {% endfor %}
+      
+
+
+
+   
+
+
+
+
+
+</main>
+
+
+
+{% endblock content %}

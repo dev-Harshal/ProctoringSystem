@@ -56,6 +56,7 @@ def updateExamView(request,exam_id):
         end_date = request.POST.get('end_date')
         start_time = request.POST.get('start_time')
         end_time = request.POST.get('end_time')
+        
         exam = Exam.objects.get(id=exam_id)
         exam.subject = subject
         exam.start_date = start_date
